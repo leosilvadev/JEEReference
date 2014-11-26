@@ -3,41 +3,46 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-
+	<h:head></h:head>
 	<h:body>
-		<p:panel>
-			<div style="border-bottom: 1px solid #E5E5E5;">
-				<h3>
-					<h:outputText value="Usuarios" />
-					<small> <h:outputText value="Todos" /></small>
-				</h3>
-			</div>
-			<h:form>
-				<p:dataTable id="dataTable" var="user"
-					value="#{userMB.users}" paginator="true" rows="5"
-					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="5,10,15">
-					<p:column>
-						<f:facet name="header">#</f:facet>
-						<h:outputText value="#{user.id}" />
-					</p:column>
-		
-					<p:column sortBy="#{user.username}">
-						<f:facet name="header">
-							<h:outputText value="Login" />
-						</f:facet>
-						<h:outputText value="#{user.username}" />
-					</p:column>
-		
-					<p:column sortBy="#{user.password}">
-						<f:facet name="header">
-							<h:outputText value="Senha" />
-						</f:facet>
-						<h:outputText value="#{user.password}" />
-					</p:column>
+		<h:form>
+			<p:panel>
+				<f:facet name="header">
+					<h:outputText value="Usuarios cadastrados" />
+				</f:facet>
+				<h:messages />
+				<p:dataTable id="dataTable" var="user" emptyMessage="Nenhum usuário encontrado"
+						value="#{userMB.users}" paginator="true" rows="5"
+						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="5,10,15">
+						<p:column>
+							<f:facet name="header">Código</f:facet>
+							<h:outputText value="#{user.id}" />
+						</p:column>
+			
+						<p:column sortBy="#{user.username}">
+							<f:facet name="header">
+								<h:outputText value="Login" />
+							</f:facet>
+							<h:outputText value="#{user.username}" />
+						</p:column>
+			
+						<p:column sortBy="#{user.password}">
+							<f:facet name="header">
+								<h:outputText value="Senha" />
+							</f:facet>
+							<h:outputText value="#{user.password}" />
+						</p:column>
 				</p:dataTable>
-			</h:form>
-			<h:messages />
-		</p:panel>
+				<f:facet name="footer">
+					<p:commandButton value="Cadastrar novo" onclick="PF('dialog-new').show();"/>
+				</f:facet>
+			</p:panel>
+		</h:form>
 	</h:body>
+	
+	<p:dialog widgetVar="dialog-new" header="Novo Usuário" modal="true" width="400">
+		Novo usuário
+	</p:dialog>
+	
 </html>
