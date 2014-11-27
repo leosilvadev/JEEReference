@@ -1,48 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
-	<h:head></h:head>
+	
 	<h:body>
-		<h:form>
-			<p:panel>
-				<f:facet name="header">
-					<h:outputText value="Usuarios cadastrados" />
-				</f:facet>
-				<h:messages />
-				<p:dataTable id="dataTable" var="user" emptyMessage="Nenhum usuário encontrado"
+		<ui:composition template="/templates/offline/main.xhtml">
+			<ui:define name="content">
+				<h:form>
+					<p:dataTable id="dataTable" var="user" emptyMessage="#{msg['page.user.list.table.body.nothingfound']}"
 						value="#{userMB.users}" paginator="true" rows="5"
 						paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 						rowsPerPageTemplate="5,10,15">
+						
+						<f:facet name="header">
+							<h:outputText value="#{msg['page.user.list.table.header.title']}" />
+						</f:facet>
+						
 						<p:column>
-							<f:facet name="header">Código</f:facet>
+							<f:facet name="header">
+								<h:outputText value="#{msg['page.user.list.table.body.columns.id']}"/>
+							</f:facet>
 							<h:outputText value="#{user.id}" />
 						</p:column>
-			
+						
 						<p:column sortBy="#{user.username}">
 							<f:facet name="header">
-								<h:outputText value="Login" />
+								<h:outputText value="#{msg['page.user.list.table.body.columns.username']}" />
 							</f:facet>
 							<h:outputText value="#{user.username}" />
 						</p:column>
-			
-						<p:column sortBy="#{user.password}">
-							<f:facet name="header">
-								<h:outputText value="Senha" />
-							</f:facet>
-							<h:outputText value="#{user.password}" />
-						</p:column>
-				</p:dataTable>
-				<f:facet name="footer">
-					<p:commandButton value="Cadastrar novo" onclick="PF('dialog-new').show();"/>
-				</f:facet>
-			</p:panel>
-		</h:form>
+						
+						<f:facet name="footer">
+							<p:commandButton value="#{msg['page.user.list.table.footer.btn.new']}" onclick="PF('dialog-new').show();"/>
+						</f:facet>
+					</p:dataTable>
+				</h:form>
+				<p:dialog widgetVar="dialog-new" header="#{msg['page.user.list.modal.new.title']}" modal="true" width="400">
+					New User
+				</p:dialog>
+			</ui:define>
+		</ui:composition>
 	</h:body>
-	
-	<p:dialog widgetVar="dialog-new" header="Novo Usuário" modal="true" width="400">
-		Novo usuário
-	</p:dialog>
-	
 </html>

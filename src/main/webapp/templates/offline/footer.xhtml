@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	
+	<h:body>
+		<ui:composition>
+			<style>
+				#footer{
+					padding: 10px;
+					background-color: rgba(236, 236, 236, 0.37);
+					margin-top: 10px;
+					border-radius: 5px;
+					border: 1px solid rgba(128, 128, 128, 0.1);
+				}
+				
+				.copyright{
+					float: left;
+					font-size: 1.2em;
+				}
+				
+				.runningOn{
+					float: right;
+					font-size: 1.2em;
+					margin-top: 10px;
+				}
+			</style>
+			
+			<div id="footer">
+				<span class="copyright">#{msg['offline.footer.copyright']}<br/>#{msg['offline.footer.allrights']}</span>
+                <span class="runningOn">#{msg['offline.footer.runningon']}</span>
+                <div style="clear:both"></div>
+			</div>
+		</ui:composition>
+	</h:body>
+</html>

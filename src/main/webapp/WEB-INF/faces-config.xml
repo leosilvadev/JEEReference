@@ -4,7 +4,6 @@
 	version="2.1">
 
 	<application>
-		<!-- configuracoes do locale (i18n) -->
 		<locale-config>
 			<default-locale>pt_BR</default-locale>
 		</locale-config>

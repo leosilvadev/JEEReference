@@ -3,23 +3,20 @@ package br.com.leonardojgs.jeereference.model.ejb;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaQuery;
+import javax.inject.Inject;
 
+import br.com.leonardojgs.jeereference.model.business.UserBusiness;
 import br.com.leonardojgs.jeereference.model.domains.User;
-import br.com.leonardojgs.jeereference.model.services.UserService;
+import br.com.leonardojgs.jeereference.model.repository.Repository;
 
 @Stateless
-public class UserEJB implements UserService {
+public class UserEJB implements UserBusiness {
 
-	@PersistenceContext
-    private EntityManager em;
+	@Inject
+    private Repository<User> repository;
 
 	public List<User> findAll() {
-		CriteriaQuery<User> cq = em.getCriteriaBuilder().createQuery(User.class);
-		cq.select(cq.from(User.class));
-		return em.createQuery(cq).getResultList();
+		return repository.findAll();
 	}
 
 }
